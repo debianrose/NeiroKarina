@@ -40,10 +40,6 @@ jobs:
       run: |
         ./gradlew assembleDebug
 
-    - name: Check build logs
-      run: |
-        tail -n 50 MyAndroidApp/app/build/outputs/logs/build.log || true
-
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
