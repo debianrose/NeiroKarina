@@ -16,6 +16,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
+        distribution: 'temurin'  # Указываем дистрибутив JDK (например, Temurin)
         java-version: '11'
 
     - name: Download and set up Android NDK
