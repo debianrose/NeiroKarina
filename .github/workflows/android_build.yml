@@ -39,6 +39,7 @@ jobs:
         mkdir -p MyAndroidApp/app/src/main/res
         echo "include ':app'" > MyAndroidApp/settings.gradle
         echo "buildscript { repositories { google(); mavenCentral() } dependencies { classpath 'com.android.tools.build:gradle:8.1.2' } }" > MyAndroidApp/build.gradle
+        echo "allprojects { repositories { google(); mavenCentral() } }" >> MyAndroidApp/build.gradle
         echo "plugins { id 'com.android.application' }" > MyAndroidApp/app/build.gradle
         echo "android { compileSdk 33; defaultConfig { applicationId 'com.example.myandroidapp'; minSdk 21; targetSdk 33; versionCode 1; versionName '1.0' } }" >> MyAndroidApp/app/build.gradle
         echo "dependencies { implementation 'androidx.appcompat:appcompat:1.6.1' }" >> MyAndroidApp/app/build.gradle
