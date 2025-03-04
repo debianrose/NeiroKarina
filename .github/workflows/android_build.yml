@@ -21,19 +21,24 @@ jobs:
 
     - name: Download and set up Android SDK
       run: |
+        # Скачиваем Command Line Tools
         wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
         unzip commandlinetools-linux-9477386_latest.zip -d android-sdk
 
+        # Устанавливаем переменные окружения
         echo "ANDROID_HOME=$PWD/android-sdk" >> $GITHUB_ENV
         echo "ANDROID_SDK_ROOT=$PWD/android-sdk" >> $GITHUB_ENV
 
+        # Принимаем лицензии и устанавливаем пакеты
         yes | android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=$PWD/android-sdk "tools" "platform-tools" "build-tools;34.0.0" "platforms;android-33"
 
     - name: Create Android project
       run: |
+        # Создаем минимальный Android-проект
         mkdir -p MyAndroidApp/app/src/main/java/com/example/myandroidapp
         mkdir -p MyAndroidApp/app/src/main/res
         echo "include ':app'" > MyAndroidApp/settings.gradle
+        echo "buildscript { repositories { google(); mavenCentral() } dependencies { classpath 'com.android.tools.build:gradle:8.1.2' } }" > MyAndroidApp/build.gradle
         echo "plugins { id 'com.android.application' }" > MyAndroidApp/app/build.gradle
         echo "android { compileSdk 33; defaultConfig { applicationId 'com.example.myandroidapp'; minSdk 21; targetSdk 33; versionCode 1; versionName '1.0' } }" >> MyAndroidApp/app/build.gradle
         echo "dependencies { implementation 'androidx.appcompat:appcompat:1.6.1' }" >> MyAndroidApp/app/build.gradle
