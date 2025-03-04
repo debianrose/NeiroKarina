@@ -29,6 +29,19 @@ jobs:
 
         yes | android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=$PWD/android-sdk "tools" "platform-tools" "build-tools;34.0.0" "platforms;android-33"
 
+    - name: Create Android project
+      run: |
+        mkdir -p MyAndroidApp/app/src/main/java/com/example/myandroidapp
+        mkdir -p MyAndroidApp/app/src/main/res
+        echo "include ':app'" > MyAndroidApp/settings.gradle
+        echo "plugins { id 'com.android.application' }" > MyAndroidApp/app/build.gradle
+        echo "android { compileSdk 33; defaultConfig { applicationId 'com.example.myandroidapp'; minSdk 21; targetSdk 33; versionCode 1; versionName '1.0' } }" >> MyAndroidApp/app/build.gradle
+        echo "dependencies { implementation 'androidx.appcompat:appcompat:1.6.1' }" >> MyAndroidApp/app/build.gradle
+        echo "package com.example.myandroidapp;" > MyAndroidApp/app/src/main/java/com/example/myandroidapp/MainActivity.java
+        echo "import android.os.Bundle; import androidx.appcompat.app.AppCompatActivity;" >> MyAndroidApp/app/src/main/java/com/example/myandroidapp/MainActivity.java
+        echo "public class MainActivity extends AppCompatActivity { @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); } }" >> MyAndroidApp/app/src/main/java/com/example/myandroidapp/MainActivity.java
+        echo "<?xml version='1.0' encoding='utf-8'?><manifest xmlns:android='http://schemas.android.com/apk/res/android' package='com.example.myandroidapp'><application android:label='MyAndroidApp'><activity android:name='.MainActivity'><intent-filter><action android:name='android.intent.action.MAIN'/><category android:name='android.intent.category.LAUNCHER'/></intent-filter></activity></application></manifest>" > MyAndroidApp/app/src/main/AndroidManifest.xml
+
     - name: Initialize Gradle Wrapper
       working-directory: ./MyAndroidApp
       run: |
