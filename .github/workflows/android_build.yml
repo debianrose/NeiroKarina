@@ -11,6 +11,7 @@ jobs:
 
     steps:
     - name: Checkout code
+<<<<<<< HEAD
       uses: actions/checkout@v4
 
     - name: Set up JDK
@@ -22,6 +23,20 @@ jobs:
       uses: android-actions/setup-ndk@v2
       with:
         ndk-version: '23.1.7779620'
+=======
+      uses: actions/checkout@v4  # Используем актуальную версию checkout
+
+    - name: Set up JDK
+      uses: actions/setup-java@v3  # Используем актуальную версию setup-java
+      with:
+        java-version: '11'
+
+    - name: Set up Android NDK manually
+      run: |
+    wget https://dl.google.com/android/repository/android-ndk-r23b-linux.zip
+    unzip android-ndk-r23b-linux.zip
+    echo "ANDROID_NDK_HOME=$PWD/android-ndk-r23b" >> $GITHUB_ENV'
+>>>>>>> 2e8c198b11116c9fdbc3e5d17a4da2f18d25d057
 
     - name: Create build directory
       run: mkdir build
@@ -33,7 +48,11 @@ jobs:
       run: cmake --build build
 
     - name: Upload artifact
+<<<<<<< HEAD
       uses: actions/upload-artifact@v4
+=======
+      uses: actions/upload-artifact@v4  # Используем актуальную версию upload-artifact
+>>>>>>> 2e8c198b11116c9fdbc3e5d17a4da2f18d25d057
       with:
         name: myandroidapp
         path: build/myandroidapp
